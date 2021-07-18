@@ -33,7 +33,7 @@ class Users extends CI_Controller
 	
 	public function testmail()
 	{
-		echo 1;
+		return $this->index();
 	}
 	
 	public function resetp($id)
