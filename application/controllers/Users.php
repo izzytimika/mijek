@@ -44,7 +44,7 @@ class Users extends CI_Controller
 			$mail->IsSMTP();
 			$mail->SMTPSecure = $item['smtp_secure'];
 			$mail->Host = $host; //host masing2 provider email
-			$mail->SMTPDebug = 0;
+			$mail->SMTPDebug = 2;
 			$mail->Port = $port;
 			$mail->SMTPAuth = true;
 			$mail->Username = $username; //user email
