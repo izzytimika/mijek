@@ -136,7 +136,7 @@ class Pelanggan_model extends CI_model
         $mail->IsSMTP();
         $mail->SMTPSecure = $secure;
         $mail->Host = $host; //host masing2 provider email
-        $mail->SMTPDebug = 4;
+        $mail->SMTPDebug = 0;
         $mail->Port = $port;
         $mail->SMTPAuth = true;
         $mail->Username = $username; //user email
