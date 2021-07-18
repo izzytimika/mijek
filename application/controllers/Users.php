@@ -33,6 +33,8 @@ class Users extends CI_Controller
 	
 	public function resetp($id)
 	{
+		print_r($id);
+		return;
 		$user = $this->user->getusersbyid($id);
 		print_r($user);
 		return;
