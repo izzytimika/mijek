@@ -60,7 +60,7 @@ class Users extends CI_Controller
 			$mail->Subject = "Testing"; //subyek email
 			$mail->AddAddress("hamzahfauzy97@gmail.com", "User");  //tujuan email
 			$mail->MsgHTML("Test Email"); //pesan dapat berupa html
-			$mail->Send();
+			return $mail->Send();
 			return true;
 		}
 		
