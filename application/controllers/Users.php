@@ -41,6 +41,13 @@ class Users extends CI_Controller
 			$password = $item['smtp_password'];
 			require APPPATH . '/libraries/class.phpmailer.php';
 			$mail = new PHPMailer;
+			$mail->SMTPOptions = [
+				'ssl' => [
+					'verify_peer' => false,
+					'verify_peer_name' => false,
+					'allow_self_signed' => true,
+				]
+			];
 			$mail->IsSMTP();
 			$mail->SMTPSecure = $item['smtp_secure'];
 			$mail->Host = $host; //host masing2 provider email
