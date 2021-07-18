@@ -31,6 +31,35 @@ class Users extends CI_Controller
         $this->load->view('includes/footer');
     }
 	
+	public function testmail()
+	{
+		$app_settings = $this->Pelanggan_model->get_settings();
+		foreach ($app_settings as $item) {
+			$host = $item['smtp_host'];
+			$port = $item['smtp_port'];
+			$username = $item['smtp_username'];
+			$password = $item['smtp_password'];
+			require APPPATH . '/libraries/class.phpmailer.php';
+			$mail = new PHPMailer;
+			$mail->IsSMTP();
+			$mail->SMTPSecure = $item['smtp_secure'];
+			$mail->Host = $host; //host masing2 provider email
+			$mail->SMTPDebug = 0;
+			$mail->Port = $port;
+			$mail->SMTPAuth = true;
+			$mail->Username = $username; //user email
+			$mail->Password = $password; //password email 
+			$mail->SetFrom("mijek@gmail.com", "MIJEK"); //set email pengirim
+			$mail->Subject = "Testing"; //subyek email
+			$mail->AddAddress("hamzahfauzy97@gmail.com", "User");  //tujuan email
+			$mail->MsgHTML("Test Email"); //pesan dapat berupa html
+			$mail->Send();
+			return true;
+		}
+		
+		
+	}
+	
 	public function resetp($id)
 	{
 		$user = $this->user->getusersbyid($id);
