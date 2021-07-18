@@ -516,7 +516,7 @@ class Driver_model extends CI_model
         if ($data['pakai_wallet'] == 1) {
             $kred = $data['harga'];
             $potongan = $kred * ($persen / 100);
-            $hasil = $kred - $potongan;
+            $hasil = $kred + ($kred - $potongan);
 
             $data_ins = array(
                 'id_user' => $data['id_driver'],
