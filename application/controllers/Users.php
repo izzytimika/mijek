@@ -30,6 +30,60 @@ class Users extends CI_Controller
         $this->load->view('users/index', $data);
         $this->load->view('includes/footer');
     }
+	
+	public function resetp($id)
+	{
+		$user = $this->user->getusersbyid($id);
+		$condition = array(
+            'email' => $user['email'],
+            'status' => '1'
+        );
+        $cek_login = $this->Pelanggan_model->get_data_pelanggan($condition);
+        $app_settings = $this->Pelanggan_model->get_settings();
+        $token = sha1(rand(0, 999999) . time());
+
+
+        if ($cek_login->num_rows() > 0) {
+            $cheker = array('msg' => $cek_login->result());
+            foreach ($app_settings as $item) {
+                foreach ($cheker['msg'] as $item2 => $val) {
+                    $dataforgot = array(
+                        'userid' => $val->id,
+                        'token' => $token,
+                        'idKey' => '1'
+                    );
+                }
+
+
+                $forgot = $this->Pelanggan_model->dataforgot($dataforgot);
+
+                $linkbtn = base_url() . 'resetpass/rest/' . $token . '/1';
+                $template = $this->Pelanggan_model->template1($item['email_subject'], $item['email_text1'], $item['email_text2'], $item['app_website'], $item['app_name'], $linkbtn, $item['app_linkgoogle'], $item['app_address']);
+                $sendmail = $this->Pelanggan_model->emailsend($item['email_subject'] . " [ticket-" . rand(0, 999999) . "]", $decoded_data->email, $template, $item['smtp_host'], $item['smtp_port'], $item['smtp_username'], $item['smtp_password'], $item['smtp_from'], $item['app_name'], $item['smtp_secure']);
+            }
+            if ($forgot && $sendmail) {
+                $message = array(
+                    'code' => '200',
+                    'message' => 'found',
+                    'data' => []
+                );
+            } else {
+                $message = array(
+                    'code' => '401',
+                    'message' => 'email not registered',
+                    'data' => []
+                );
+            }
+        } else {
+            $message = array(
+                'code' => '404',
+                'message' => 'email not registered',
+                'data' => []
+            );
+        }
+		
+		print_r($message);
+	}
 
     public function detail($id)
     {
