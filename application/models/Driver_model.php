@@ -432,7 +432,7 @@ class Driver_model extends CI_model
                 $this->delete_chat($get_mitra->row('id_merchant'), $cond['id_driver']);
             };
 
-            // $cutUser = $this->cut_user_saldo_by_order($dataC);
+            $cutUser = $this->cut_user_saldo_by_order($dataC);
             $cutting = $this->cut_driver_saldo_by_order($data_cut);
 
             $this->delete_chat($cond['id_driver'], $last_trans->row('id_pelanggan'));
