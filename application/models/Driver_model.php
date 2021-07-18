@@ -427,12 +427,12 @@ class Driver_model extends CI_model
                     'nama_mitra' => $get_mitra->row('nama_mitra'),
                     'pakai_wallet' => $last_trans->row('pakai_wallet')
                 );
-                $this->cut_mitra_saldo_by_order($data_cut_mitra);
+                // $this->cut_mitra_saldo_by_order($data_cut_mitra);
                 $this->delete_chat($get_mitra->row('id_merchant'), $last_trans->row('id_pelanggan'));
                 $this->delete_chat($get_mitra->row('id_merchant'), $cond['id_driver']);
             };
 
-            $cutUser = $this->cut_user_saldo_by_order($dataC);
+            // $cutUser = $this->cut_user_saldo_by_order($dataC);
             $cutting = $this->cut_driver_saldo_by_order($data_cut);
 
             $this->delete_chat($cond['id_driver'], $last_trans->row('id_pelanggan'));
