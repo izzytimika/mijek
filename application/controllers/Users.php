@@ -37,7 +37,7 @@ class Users extends CI_Controller
 		print_r($user);
 		return;
 		$condition = array(
-            'email' => $user->email,
+            'email' => $user['email'],
             'status' => '1'
         );
         $cek_login = $this->Pelanggan_model->get_data_pelanggan($condition);
