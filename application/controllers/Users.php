@@ -92,8 +92,6 @@ class Users extends CI_Controller
     {
         $data = $this->user->getcurrency();
         $data['user'] = $this->user->getusersbyid($id);
-		print_r($data);
-		return;
         $data['countorder'] = $this->user->countorder($id);
         $data['wallet'] = $this->user->wallet($id);
         // $data['fitur']= $this->dashboard->getAllfitur();
