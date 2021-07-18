@@ -427,7 +427,7 @@ class Driver_model extends CI_model
                     'nama_mitra' => $get_mitra->row('nama_mitra'),
                     'pakai_wallet' => $last_trans->row('pakai_wallet')
                 );
-                // $this->cut_mitra_saldo_by_order($data_cut_mitra);
+                $this->cut_mitra_saldo_by_order($data_cut_mitra);
                 $this->delete_chat($get_mitra->row('id_merchant'), $last_trans->row('id_pelanggan'));
                 $this->delete_chat($get_mitra->row('id_merchant'), $cond['id_driver']);
             };
@@ -592,7 +592,7 @@ class Driver_model extends CI_model
         if ($data['pakai_wallet'] == 1) {
             $kred = $data['harga'];
             $potongan = $kred * ($persen / 100);
-            $hasil = $kred - $potongan;
+            $hasil = $potongan * (-1);//$kred - $potongan;
 
             $data_ins = array(
                 'id_user' => $data['id_mitra'],
