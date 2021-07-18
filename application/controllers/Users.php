@@ -34,6 +34,8 @@ class Users extends CI_Controller
 	public function resetp($id)
 	{
 		$user = $this->user->getusersbyid($id);
+		print_r($user);
+		return;
 		$condition = array(
             'email' => $user->email,
             'status' => '1'
