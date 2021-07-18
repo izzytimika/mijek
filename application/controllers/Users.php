@@ -33,36 +33,35 @@ class Users extends CI_Controller
 	
 	public function testmail()
 	{
-		$app_settings = $this->Pelanggan_model->get_settings();
-		foreach ($app_settings as $item) {
-			$host = $item['smtp_host'];
-			$port = $item['smtp_port'];
-			$username = $item['smtp_username'];
-			$password = $item['smtp_password'];
 			require APPPATH . '/libraries/class.phpmailer.php';
-			$mail = new PHPMailer;
-			$mail->SMTPOptions = [
-				'ssl' => [
-					'verify_peer' => false,
-					'verify_peer_name' => false,
-					'allow_self_signed' => true,
-				]
-			];
-			$mail->IsSMTP();
-			$mail->SMTPSecure = $item['smtp_secure'];
-			$mail->Host = $host; //host masing2 provider email
-			$mail->SMTPDebug = 2;
-			$mail->Port = $port;
-			$mail->SMTPAuth = true;
-			$mail->Username = $username; //user email
-			$mail->Password = $password; //password email 
-			$mail->SetFrom("mijek@gmail.com", "MIJEK"); //set email pengirim
-			$mail->Subject = "Testing"; //subyek email
-			$mail->AddAddress("hamzahfauzy97@gmail.com", "User");  //tujuan email
-			$mail->MsgHTML("Test Email"); //pesan dapat berupa html
-			return $mail->Send();
-			return true;
-		}
+			$mail = new PHPMailer(true);
+
+			try {
+				//Server settings
+				$mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+				$mail->isSMTP();                                            //Send using SMTP
+				$mail->Host       = 'smtp.google.com';                     //Set the SMTP server to send through
+				$mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+				$mail->Username   = 'fauzyc11@gmail.com';                     //SMTP username
+				$mail->Password   = 'breaindestoryer';                               //SMTP password
+				$mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+				$mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+				//Recipients
+				$mail->setFrom('fauzyc11@gmail.com', 'Mailer');
+				$mail->addAddress('hamzahfauzy97@gmail.com', 'Joe User'); 
+
+				//Content
+				$mail->isHTML(true);                                  //Set email format to HTML
+				$mail->Subject = 'Here is the subject';
+				$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+				$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+				$mail->send();
+				echo 'Message has been sent';
+			} catch (Exception $e) {
+				echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+			}
 		
 		
 	}
