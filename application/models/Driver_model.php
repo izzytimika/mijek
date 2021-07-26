@@ -433,7 +433,7 @@ class Driver_model extends CI_model
             };
 
             $cutUser = $this->cut_user_saldo_by_order($dataC);
-            $cutting = $this->cut_driver_saldo_by_order($data_cut);
+            $cutting = $this->cut_driver_saldo_by_order($data_cut,$get_mitra->row('total_biaya'));
 
             $this->delete_chat($cond['id_driver'], $last_trans->row('id_pelanggan'));
 
@@ -505,7 +505,7 @@ class Driver_model extends CI_model
         }
     }
 
-    function cut_driver_saldo_by_order($data)
+    function cut_driver_saldo_by_order($data,$harga_merchant=0)
     {
         $this->db->select('komisi');
         $this->db->where('id_fitur', $data['order_fitur']);
@@ -514,7 +514,7 @@ class Driver_model extends CI_model
         $this->db->where('id_user', $data['id_driver']);
         $saldo = $this->db->get('saldo')->row('saldo');
         if ($data['pakai_wallet'] == 1) {
-            $kred = $data['harga'];
+            $kred = $data['harga']+$harga_merchant;
             $potongan = $kred * ($persen / 100);
 			$hasil = $kred - $potongan;
 			if (in_array($data['fitur'], [10,11,12,13]))
