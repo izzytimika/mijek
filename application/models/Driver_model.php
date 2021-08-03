@@ -515,7 +515,7 @@ class Driver_model extends CI_model
         $saldo = $this->db->get('saldo')->row('saldo');
         if ($data['pakai_wallet'] == 1) {
             $kred = $data['harga']+$harga_merchant;
-            $potongan = $kred * ($persen / 100);
+            $potongan = $data['harga'] * ($persen / 100);
 			$hasil = $kred - $potongan;
 			if (in_array($data['fitur'], [10,11,12,13]))
 				$hasil = $kred + $hasil;
