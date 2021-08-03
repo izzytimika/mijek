@@ -804,8 +804,8 @@ class Merchant extends REST_Controller
 
             $dataitem = array(
                 'nama_item' => $dec_data->nama,
-                'harga_item' => $dec_data->harga,
-                'harga_promo' => $dec_data->harga_promo,
+                'harga_item' => $harga,
+                'harga_promo' => $harga_promo,
                 'kategori_item' => $dec_data->kategori,
                 'deskripsi_item' => $dec_data->deskripsi,
                 'foto_item' => $namafoto,
