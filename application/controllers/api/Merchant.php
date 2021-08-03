@@ -732,7 +732,7 @@ class Merchant extends REST_Controller
 		$harga = $dec_data->harga;
 		$harga = str_replace('.','',$harga);
 		$harga_promo = $dec_data->harga_promo;
-		$harga_promo = str_replace('.','',$harga_promo);
+		$harga_promo = $harga_promo?str_replace('.','',$harga_promo):0;
 
         $dataitem = array(
             'id_merchant' => $dec_data->idmerchant,
@@ -779,7 +779,7 @@ class Merchant extends REST_Controller
 		$harga = $dec_data->harga;
 		$harga = str_replace('.','',$harga);
 		$harga_promo = $dec_data->harga_promo;
-		$harga_promo = str_replace('.','',$harga_promo);
+		$harga_promo = $harga_promo ? str_replace('.','',$harga_promo) : 0;
 
 
 
