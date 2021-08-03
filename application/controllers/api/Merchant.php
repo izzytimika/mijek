@@ -730,8 +730,10 @@ class Merchant extends REST_Controller
         $path = "images/itemmerchant/" . $namafoto;
         file_put_contents($path, base64_decode($image));
 		$harga = $dec_data->harga;
+		$harga = str_replace(',','',$harga);
 		$harga = str_replace('.','',$harga);
 		$harga_promo = $dec_data->harga_promo;
+		$harga_promo = $harga_promo?str_replace(',','',$harga_promo):0;
 		$harga_promo = $harga_promo?str_replace('.','',$harga_promo):0;
 
         $dataitem = array(
@@ -777,8 +779,10 @@ class Merchant extends REST_Controller
             //'token' => $decoded_data->token
         );
 		$harga = $dec_data->harga;
+		$harga = str_replace(',','',$harga);
 		$harga = str_replace('.','',$harga);
 		$harga_promo = $dec_data->harga_promo;
+		$harga_promo = $harga_promo ? str_replace(',','',$harga_promo) : 0;
 		$harga_promo = $harga_promo ? str_replace('.','',$harga_promo) : 0;
 
 
