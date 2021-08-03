@@ -213,8 +213,8 @@ class Mitra extends CI_Controller
                 $hargaitem = html_escape($this->input->post('harga_item', TRUE));
                 $hargapromo = $promo;
 
-                $remove = array(".", ",");
-                $add = array("", "");
+                $remove = ","; // array(".", ",");
+                $add = ""; // array("", "");
                 $data = [
                     'kategori_item'     => html_escape($this->input->post('kategori_item', TRUE)),
                     'nama_item'         => html_escape($this->input->post('nama_item', TRUE)),
