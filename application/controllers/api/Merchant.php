@@ -729,12 +729,16 @@ class Merchant extends REST_Controller
         $namafoto = time() . '-' . rand(0, 99999) . ".jpg";
         $path = "images/itemmerchant/" . $namafoto;
         file_put_contents($path, base64_decode($image));
+		$harga = $dec_data->harga;
+		$harga = str_replace('.','',$harga);
+		$harga_promo = $dec_data->harga_promo;
+		$harga_promo = str_replace('.','',$harga_promo);
 
         $dataitem = array(
             'id_merchant' => $dec_data->idmerchant,
             'nama_item' => $dec_data->nama,
-            'harga_item' => $dec_data->harga,
-            'harga_promo' => $dec_data->harga_promo,
+            'harga_item' => $harga,
+            'harga_promo' => $harga_promo,
             'kategori_item' => $dec_data->kategori,
             'deskripsi_item' => $dec_data->deskripsi,
             'foto_item' => $namafoto,
@@ -772,14 +776,18 @@ class Merchant extends REST_Controller
             'telepon_mitra' => $dec_data->no_telepon,
             //'token' => $decoded_data->token
         );
+		$harga = $dec_data->harga;
+		$harga = str_replace('.','',$harga);
+		$harga_promo = $dec_data->harga_promo;
+		$harga_promo = str_replace('.','',$harga_promo);
 
 
 
         if ($dec_data->foto == null && $dec_data->foto_lama == null) {
             $dataitem = array(
                 'nama_item' => $dec_data->nama,
-                'harga_item' => $dec_data->harga,
-                'harga_promo' => $dec_data->harga_promo,
+                'harga_item' => $harga,
+                'harga_promo' => $harga_promo,
                 'kategori_item' => $dec_data->kategori,
                 'deskripsi_item' => $dec_data->deskripsi,
                 'status_promo' => $dec_data->status_promo
